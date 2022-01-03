@@ -1,0 +1,10 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "TeleBot"
+      POSTGRES_USER: "TeleBot"
+      POSTGRES_PASSWORD: "4rfgt5"
+    ports:
+      - "5432:5432"

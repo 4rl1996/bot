@@ -1,0 +1,16 @@
+server:
+  port: 8443
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/TeleBot
+    username: TeleBot
+    password: 4rfgt5
+  liquibase:
+    enabled: true
+
+bot:
+  name: lyjustic_edutestbot
+  token: ${TOKEN}
+  url: https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={exclude}&appid={appid}&lang={lang}&units={units}
