@@ -3,6 +3,7 @@ package com.example.telebot;
 import com.example.telebot.config.TelegramBotConst;
 import com.example.telebot.data.entity.User;
 import com.example.telebot.handler.HandlerManager;
+import com.example.telebot.mapper.UserMapper;
 import com.example.telebot.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ public class EduTestBot extends TelegramLongPollingBot {
     private final UserService service;
     private final TelegramBotConst config;
     private final HandlerManager manager;
+    private final UserMapper mapper;
 
     @Override
     public String getBotUsername() {
@@ -33,18 +35,7 @@ public class EduTestBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         try {
             execute(manager.handle(update));
-            String text = update.getMessage().getText();
-            String userLogin = update.getMessage().getFrom().getUserName();
-            String userFullName = update.getMessage().getFrom().getFirstName() + " "
-                    + update.getMessage().getFrom().getLastName();
-            Long userId = update.getMessage().getChatId();
-            Integer date = update.getMessage().getDate();
-            service.saveOrUpdate(User.builder()
-                            .id(userId)
-                            .userLogin(userLogin)
-                            .userFullName(userFullName)
-                            .date(date)
-                            .build());
+            service.saveOrUpdate(mapper.getUserInfo(update));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

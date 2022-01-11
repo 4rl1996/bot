@@ -1,5 +1,5 @@
 server:
-  port: 8443
+  port: 8081
 
 spring:
   datasource:
@@ -14,3 +14,4 @@ bot:
   name: lyjustic_edutestbot
   token: ${TOKEN}
   url: https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={exclude}&appid={appid}&lang={lang}&units={units}
+  appid: 993f740fb37f4a0c5478a56034b089d2
